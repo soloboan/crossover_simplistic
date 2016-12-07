@@ -2,9 +2,9 @@
 ## no mutation 
 ## no recombination hotspots
 
-crossover.haps <- function(nsnps,hapAB){
-  (recomb.off <- sample(x=0:2,size=1,prob=c(0.10,0.75,0.15)))
-  nsnp.perchr <- nsnps
+crossover.haps <- function(hapAB,probRec=c(0=0.10,1=0.75,2=0.15)){
+  recomb.off <- sample(x=0:2,size=1,prob=probRec)
+  nsnp.perchr <- nrow(hapAB)
   if(recomb.off==0){
     choosehap <- sample(x=1:2,size=1)
     usehap <- hapAB[,choosehap] 
