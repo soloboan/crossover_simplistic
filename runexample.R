@@ -2,7 +2,7 @@
 ## assuming you have 10 SNPs on chromosome 1
 ## with 10 sires and 100 dams
 
-nsnps <- 10000     ## number of snps
+nsnps <- 100     ## number of snps
 nsires <- 10    ## number of sire
 ndams <- 100    ## number of dams
 ### generate ids for the sires and dams
@@ -31,18 +31,18 @@ sirecol=which(colnames(haplos_A)==sire)
 hapABsire <- cbind.data.frame(A=haplos_A[,sirecol],B=haplos_B[,sirecol])
 ## t(hapABsire)
 source('crossoverhaplos.R')
-(datsire <- crossover.haps(nsnps,hapABsire))
+(datsire <- crossover.haps(hapABsire))
 
 dam='dam001'    ### using the dam ID to get the haplotypes of the dam
 damcol=which(colnames(haplos_A)==dam) 
 hapABdam <- cbind.data.frame(A=haplos_A[,damcol],B=haplos_B[,damcol])
 ## t(hapABdam)
-(datdam <- crossover.haps(nsnps,hapABdam))
+(datdam <- crossover.haps(hapABdam))
 
 
 # for both sire and dam, after identifying the sire and dam of the offpsring
-(dat <- cbind.data.frame(sire=crossover.haps(nsnps,hapABsire),
-                             dam=crossover.haps(nsnps,hapABdam)))
+(dat <- cbind.data.frame(sire=crossover.haps(hapABsire),
+                             dam=crossover.haps(hapABdam)))
 
 
 (sirecont <- c(0.025,0.045,0.5,0.025,0.2,0.075,0.025,0.025,0.045,0.035))
@@ -79,8 +79,8 @@ for(i in 1:length(sireids)){
     dam <- damids[j]    ### using the dam ID to get the haplotypes of the dam
     damcol=which(colnames(haplos_A)==dam) 
     hapABdam <- cbind.data.frame(A=haplos_A[,damcol],B=haplos_B[,damcol])
-    (offproduced <- cbind.data.frame(sire=crossover.haps(nsnps,hapABsire),
-                                     dam=crossover.haps(nsnps,hapABdam)))
+    (offproduced <- cbind.data.frame(sire=crossover.haps(hapABsire),
+                                     dam=crossover.haps(hapABdam)))
     colnames(offproduced) <- c(paste('offhapA',j,sep=''),paste('offhapB',j,sep=''))
     
     if(j==1){
